@@ -1,0 +1,31 @@
+/* nord-theme.css */
+
+/* Base reveal.js theme (layout, fonts). mkslides copies this file to
+   site/assets/ and the reveal.js bundle to site/assets/reveal-js/. */
+@import url("reveal-js/dist/theme/simple.css");
+
+:root {
+  /* Nord Palette Colors */
+  --nord0: #2e3440;  /* Polar Night (Dark background) */
+  --nord3: #4c566a;  /* Polar Night (Muted gray) */
+  --nord4: #d8dee9;  /* Snow Storm (Main text) */
+  --nord6: #eceff4;  /* Snow Storm (Bright text/headings) */
+  --nord8: #88c0d0;  /* Frost (Ice blue accent) */
+  --nord9: #81a1c1;  /* Frost (Deep blue accent) */
+
+  /* Reveal.js overrides */
+  --r-background-color: var(--nord0);
+  --r-main-color: var(--nord4);
+  --r-heading-color: var(--nord6);
+  --r-link-color: var(--nord8);
+  --r-link-color-dark: var(--nord9);
+  --r-link-color-hover: var(--nord9);
+  --r-selection-background-color: var(--nord3);
+  --r-selection-color: var(--nord6);
+}
+
+/* Ensure code blocks stand out cleanly */
+.reveal pre code {
+  background: #3b4252 !important; /* Nord1 */
+  color: var(--nord6) !important;
+}
