@@ -1,9 +1,5 @@
 /* nord-theme.css */
 
-/* Base reveal.js theme (layout, fonts). mkslides copies this file to
-   site/assets/ and the reveal.js bundle to site/assets/reveal-js/. */
-@import url("reveal-js/dist/theme/simple.css");
-
 :root {
   /* Nord Palette Colors */
   --nord0: #2e3440;  /* Polar Night (Dark background) */

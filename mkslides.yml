@@ -2,5 +2,10 @@ index:
   title: Stokes flow in terrain-following coordinates
 slides:
   separator_vertical: ^\s*-v-\s*$
-  theme: nord-theme.css
+  theme: simple
   highlight_theme: nord
+plugins:
+  - extra_css:
+      - nord-theme.css
+revealjs:
+  transition: none

@@ -22,10 +22,15 @@ A problem in glaciology, but also in geodynamics!
 
 -v-
 
-## The solutions
+The **orthodox** approach: Cartesian coordinates and a mesh that **evolves in time**
 
-* The **orthodox** approach: Cartesian coordinates and a mesh that **evolves in time**
-* The **alternative** approach: use a fixed mesh in a **moving coordinate system**
+-v-
+
+<img src="plate-1a.svg">
+
+-v-
+
+<img src="plate-1b.svg">
 
 -v-
 
@@ -54,10 +59,9 @@ Solve the **Stokes equations** in a coordinate system that follows the fluid sur
 
 ### Constitutive law
 
-* The strain rate tensor:
+The strain rate tensor:
 $$\dot\varepsilon = \frac{1}{2}\left(\nabla u + \nabla u^\*\right)$$
-The part of the velocity that isn't due to rotation
-* Newtonian fluid:
+Newtonian fluid:
 $$\tau = 2\mu\dot\varepsilon$$
 
 -v-
@@ -68,6 +72,14 @@ $$L(u, p) = \int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot
 
 minimize this ⤴
 
+-v-
+
+### Free surface
+
+Surface elevation follows the surface velocity + SMB
+
+$$\frac{\partial s}{\partial t} + u\big|\_{z = s}\cdot\nabla s - w\big|\_{z = s} = \dot a - \dot m$$
+
 ---
 
 ## Terrain-following coordinates
@@ -76,7 +88,7 @@ minimize this ⤴
 
 ### Mapped coordinates
 
-illustration
+<img src="plate-2.svg">
 
 -v-
 
@@ -91,11 +103,11 @@ $$\left[\begin{matrix} x\_1 \\\\ x\_2 \\\\ x\_3\end{matrix}\right] = \left[\begi
 The slope of the coordinate surfaces:
 $$\gamma = \nabla b + \xi\_3\cdot\nabla h$$
 The derivative of the map from $\xi \to x$ is:
-$$J = \left[\begin{matrix} I & 0 \\\\ \gamma^* & h\end{matrix}\right]$$
+$$J \equiv \frac{\mathrm dx}{\mathrm d\xi} = \left[\begin{matrix} I & 0 \\\\ \gamma^* & h\end{matrix}\right]$$
 
 -v-
 
-### Illustration (again)
+<img src="plate-3.svg">
 
 -v-
 
@@ -114,6 +126,10 @@ $$\mathrm dx = |\det J|\mathrm d\xi = h\\;\mathrm d\xi$$
 ### Velocities
 
 $$u\_x = \frac{\mathrm dx}{\mathrm dt} = \frac{\mathrm dx}{\mathrm d\xi}\\;\frac{\mathrm d\xi}{\mathrm dt} = Ju\_\xi$$
+
+-v-
+
+illustration
 
 -v-
 
@@ -144,27 +160,59 @@ where we use the formula from a few slides back to define the velocity gradient,
 
 ### Oh no
 
-$$\nabla\_xu\_x = \nabla\_\xi\left(Ju\_\xi\right)J^{-1}$$
+$$\nabla\_xu\_x = \nabla\_\xi\left({\color{\#81A1C1}{J}} u\_\xi\right)J^{-1}$$
 
 -v-
 
 ### Oh NO
 
--v-
-
-### Will this agony never cease
+<img src="plate-5.svg">
 
 -v-
 
-### The agony shows few signs of cessation
+### Solution
 
-A transport equation is a divergence in spacetime:
+Give up for a couple years
 
-$$\frac{\partial}{\partial t}\rho + \nabla\cdot \rho u = 0$$
+-v-
 
-$$\leftrightarrow$$
+### Solution
 
-$$\nabla\cdot F = 0 \quad \text{where}\\; F = \left[\begin{matrix}\rho \\\\ \rho u\end{matrix}\right]$$
+* Use *discontinuous* Galerkin (DG) methods.
+* **Idea**: use less restrictive basis functions, restore continuity through the variational form
+
+-v-
+
+<img src="plate-6.svg">
+
+-v-
+
+### General approach
+
+$$\begin{align\*}
+& \text{DG variational form} = \\\\
+& \qquad \text{original variational form} \\\\
+& \qquad\qquad + \text{fluxes across facets} \\\\
+& \qquad\qquad\qquad + \text{facet jump penalty}
+\end{align\*}$$
+
+-v-
+
+### The variational form
+
+$$\begin{align\*}
+L(u, p) & = \int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - g \cdot u\right)\mathrm dx \\\\
+& \qquad + \sum\_{\Gamma}\int\_{\Gamma}\langle \tau - pI\rangle : [u\otimes n]\mathrm d\Gamma \\\\
+& \qquad\qquad + \sum\_{\Gamma}\int\_{\Gamma}\frac{\alpha\mu}{2|\Gamma|}|[u]|^2\mathrm d\Gamma
+\end{align\*}$$
+
+-v-
+
+### DG methods
+
+* **Pros**: extremely flexible
+* **Cons**: confusing, practitioners are annoying
+* DG has a **pedagogy** problem!
 
 ---
 
