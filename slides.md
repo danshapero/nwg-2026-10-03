@@ -101,7 +101,7 @@ $$\left[\begin{matrix} x\_1 \\\\ x\_2 \\\\ x\_3\end{matrix}\right] = \left[\begi
 ### Linearization
 
 The slope of the coordinate surfaces:
-$$\gamma = \nabla b + \xi\_3\cdot\nabla h$$
+$$\gamma \equiv \nabla b + \xi\_3\cdot\nabla h$$
 The derivative of the map from $\xi \to x$ is:
 $$J \equiv \frac{\mathrm dx}{\mathrm d\xi} = \left[\begin{matrix} I & 0 \\\\ \gamma^* & h\end{matrix}\right]$$
 
@@ -150,7 +150,9 @@ Soln: How do gradients and divergences relate?
 
 $$L(u, p) = \int\_\Omega\left(\frac{h}{2}\tau :\dot\varepsilon - p\nabla\cdot hu - hg\cdot Ju\right)\mathrm d\xi$$
 
-where we use the formula from a few slides back to define the velocity gradient, strain rate, etc.
+where now the strain rate is
+
+$$\dot\varepsilon = \frac{1}{2}\left\\{\nabla(Ju)J^{-1} + J^{-\*}\nabla(Ju)^\*\right\\}$$
 
 ---
 
@@ -191,19 +193,23 @@ Give up for a couple years
 
 $$\begin{align\*}
 & \text{DG variational form} = \\\\
-& \qquad \text{original variational form} \\\\
-& \qquad\qquad + \text{fluxes across facets} \\\\
-& \qquad\qquad\qquad + \text{facet jump penalty}
+& \qquad {\color{#81A1C1}{\text{original variational form}}} \\\\
+& \qquad\qquad + {\color{#A3BE8C}{\text{fluxes across facets}}} \\\\
+& \qquad\qquad\qquad + {\color{#D08770}{\text{facet jump penalty}}}
 \end{align\*}$$
+
+-v-
+
+illustration
 
 -v-
 
 ### The variational form
 
 $$\begin{align\*}
-L(u, p) & = \int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - g \cdot u\right)\mathrm dx \\\\
-& \qquad + \sum\_{\Gamma}\int\_{\Gamma}\langle \tau - pI\rangle : [u\otimes n]\mathrm d\Gamma \\\\
-& \qquad\qquad + \sum\_{\Gamma}\int\_{\Gamma}\frac{\alpha\mu}{2|\Gamma|}|[u]|^2\mathrm d\Gamma
+L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - g \cdot u\right)\mathrm dx}} \\\\
+& \qquad + {\color{#A3BE8C}{\sum\_{\Gamma}\int\_{\Gamma}\langle \tau - pI\rangle : [u\otimes n]\mathrm d\ell}} \\\\
+& \qquad\qquad + {\color{#D08770}{\sum\_{\Gamma}\int\_{\Gamma}\frac{\alpha\mu}{2|\Gamma|}|[u]|^2\mathrm d\ell}}
 \end{align\*}$$
 
 -v-
@@ -213,6 +219,16 @@ L(u, p) & = \int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot
 * **Pros**: extremely flexible
 * **Cons**: confusing, practitioners are annoying
 * DG has a **pedagogy** problem!
+
+-v-
+
+### The variational form in TFC
+
+$$\begin{align\*}
+L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{h}{2}\tau : \dot\varepsilon - p\nabla\cdot hu - hg\cdot Ju\right)\mathrm dx}} \\\\
+& \qquad + {\color{#A3BE8C}{\sum\_{\Gamma}\int\_{\Gamma}\langle h(\tau - pI)\rangle : [Ju\otimes nJ^{-1}]\mathrm d\ell}} \\\\
+& \qquad\qquad + {\color{#D08770}{\sum\_{\Gamma}\int\_{\Gamma}\frac{\alpha\mu}{2|\Gamma|}|[Ju]|^2\\; \langle h\rangle\\,\mathrm d\ell}}
+\end{align\*}$$
 
 ---
 
