@@ -243,6 +243,14 @@ L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{h}{2}\tau : \dot\varepsil
 
 -v-
 
+<video width="640" height="480" controls>
+  <source src="rayleigh-taylor.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
+-v-
+
 ### Future work
 
 - Nonlinear rheology requires *hybridization*
