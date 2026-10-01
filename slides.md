@@ -38,9 +38,18 @@ The **orthodox** approach: Cartesian coordinates and a mesh that **evolves in ti
 
 -v-
 
+The **alternative**: use a fixed mesh, but a coordinate system that **follows the terrain**
+
+<img src="plate-2.svg">
+
+
+-v-
+
 ### What did I do?
 
-Solve the **Stokes equations** in a coordinate system that follows the fluid surface.
+* Oceanographers use TFC but ignore viscosity.
+* Glaciologists use TFC on simplified equations.
+* **New**: Solve the **Stokes equations** in TFC.
 
 -v-
 
