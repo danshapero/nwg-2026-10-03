@@ -95,9 +95,9 @@ $$\tau = 2\mu\dot\varepsilon$$
 
 ### Stokes flow
 
-$$L(u, p) = \int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - \rho g\cdot u \right)\mathrm dx$$
+minimize total viscous power dissipation + gravity
 
-minimize this ⤴
+s.t. the flow is incompressible
 
 -v-
 
@@ -162,19 +162,15 @@ $$\nabla\_x\phi = \frac{\mathrm d\phi}{\mathrm dx} = \frac{\mathrm d\phi}{\mathr
 
 -v-
 
-### Divergences
+### Stokes flow in TFC
 
-* This one is less obvious:
-$$\nabla\_x\cdot F\_x = \frac{1}{h}\nabla\_\xi\cdot (hF\_\xi)$$
-* Soln: How do gradients and divergences relate?
+minimize total viscous power dissipation + gravity
 
--v-
+s.t. the flow is incompressible
 
-$$L(u, p) = \int\_\Omega\left(\frac{h}{2}\tau :\dot\varepsilon - p\nabla\cdot hu - \rho gh\cdot Ju\right)\mathrm d\xi$$
+**but** now the velocity gradient is:
 
-where now the strain rate is
-
-$$\dot\varepsilon = \frac{1}{2}\left\\{\nabla(Ju)J^{-1} + J^{-\*}\nabla(Ju)^\*\right\\}$$
+$$\nabla\_xu\_x = \nabla(Ju)J^{-1}$$
 
 ---
 
@@ -225,13 +221,10 @@ $$\begin{align\*}
 
 -v-
 
-### The variational form
+### DG methods
 
-$$\begin{align\*}
-L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - \rho g \cdot u\right)\mathrm dx}} \\\\
-& \qquad - {\color{#A3BE8C}{\sum\_{\Gamma}\int\_{\Gamma}\langle \tau - pI\rangle : [u\otimes n]\mathrm d\ell}} \\\\
-& \qquad\qquad + {\color{#D08770}{\sum\_{\Gamma}\int\_{\Gamma}\frac{\alpha\mu}{2|\Gamma|}|[u]|^2\mathrm d\ell}}
-\end{align\*}$$
+* **Old idea**: enforce continuity of $u$
+* **New use**: enforce continuity of $Ju$
 
 -v-
 
@@ -240,16 +233,6 @@ L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsil
 * **Pros**: extremely flexible
 * **Cons**: confusing, practitioners are annoying
 * DG has a **pedagogy** problem!
-
--v-
-
-### The variational form in TFC
-
-$$\begin{align\*}
-L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{h}{2}\tau : \dot\varepsilon - p\nabla\cdot hu - \rho gh\cdot Ju\right)\mathrm dx}} \\\\
-& \qquad - {\color{#A3BE8C}{\sum\_{\Gamma}\int\_{\Gamma}\langle h(\tau - pI)\rangle : [Ju\otimes nJ^{-1}]\mathrm d\ell}} \\\\
-& \qquad\qquad + {\color{#D08770}{\sum\_{\Gamma}\int\_{\Gamma}\frac{\alpha\mu}{2|\Gamma|}|[Ju]|^2\\; \langle h\rangle\\,\mathrm d\ell}}
-\end{align\*}$$
 
 ---
 
