@@ -38,6 +38,29 @@ The **orthodox** approach: Cartesian coordinates and a mesh that **evolves in ti
 
 Solve the **Stokes equations** in a coordinate system that follows the fluid surface.
 
+-v-
+
+### Why did I do this?
+
+**Monolithic** coupling is necessary for:
+* higher-order timestepping
+* adaptive timestepping
+
+-v-
+
+<video width="640" height="480" controls>
+  <source src="perlin-glacier.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+-v-
+
+<video width="640" height="480" controls>
+  <source src="rayleigh-taylor.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
 ---
 
 ## Prologue
