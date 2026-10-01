@@ -34,6 +34,10 @@ The **orthodox** approach: Cartesian coordinates and a mesh that **evolves in ti
 
 -v-
 
+<img src="plate-1c.svg">
+
+-v-
+
 ### What did I do?
 
 Solve the **Stokes equations** in a coordinate system that follows the fluid surface.
@@ -91,7 +95,7 @@ $$\tau = 2\mu\dot\varepsilon$$
 
 ### Stokes flow
 
-$$L(u, p) = \int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - g\cdot u \right)\mathrm dx$$
+$$L(u, p) = \int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - \rho g\cdot u \right)\mathrm dx$$
 
 minimize this ⤴
 
@@ -109,13 +113,9 @@ $$\frac{\partial s}{\partial t} + u\big|\_{z = s}\cdot\nabla s - w\big|\_{z = s}
 
 -v-
 
-### Mapped coordinates
-
 <img src="plate-2.svg">
 
 -v-
-
-### Mapped coordinates
 
 $$\left[\begin{matrix} x\_1 \\\\ x\_2 \\\\ x\_3\end{matrix}\right] = \left[\begin{matrix}\xi\_1 \\\\ \xi\_2 \\\\ b(\xi\_1, \xi\_2) + \xi\_3\cdot h(\xi\_1, \xi\_2)\end{matrix}\right]$$
 
@@ -152,7 +152,7 @@ $$u\_x = \frac{\mathrm dx}{\mathrm dt} = \frac{\mathrm dx}{\mathrm d\xi}\\;\frac
 
 -v-
 
-illustration
+<img src="plate-4.svg">
 
 -v-
 
@@ -166,12 +166,11 @@ $$\nabla\_x\phi = \frac{\mathrm d\phi}{\mathrm dx} = \frac{\mathrm d\phi}{\mathr
 
 * This one is less obvious:
 $$\nabla\_x\cdot F\_x = \frac{1}{h}\nabla\_\xi\cdot (hF\_\xi)$$
-Soln: How do gradients and divergences relate?
-* This will come back to haunt us, remember it.
+* Soln: How do gradients and divergences relate?
 
 -v-
 
-$$L(u, p) = \int\_\Omega\left(\frac{h}{2}\tau :\dot\varepsilon - p\nabla\cdot hu - hg\cdot Ju\right)\mathrm d\xi$$
+$$L(u, p) = \int\_\Omega\left(\frac{h}{2}\tau :\dot\varepsilon - p\nabla\cdot hu - \rho gh\cdot Ju\right)\mathrm d\xi$$
 
 where now the strain rate is
 
@@ -203,8 +202,7 @@ Give up for a couple years
 
 ### Solution
 
-* Use *discontinuous* Galerkin (DG) methods.
-* **Idea**: use less restrictive basis functions, restore continuity through the variational form
+Use *discontinuous* Galerkin (DG) methods.
 
 -v-
 
@@ -223,15 +221,15 @@ $$\begin{align\*}
 
 -v-
 
-illustration
+<img src="plate-7.svg">
 
 -v-
 
 ### The variational form
 
 $$\begin{align\*}
-L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - g \cdot u\right)\mathrm dx}} \\\\
-& \qquad + {\color{#A3BE8C}{\sum\_{\Gamma}\int\_{\Gamma}\langle \tau - pI\rangle : [u\otimes n]\mathrm d\ell}} \\\\
+L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - \rho g \cdot u\right)\mathrm dx}} \\\\
+& \qquad - {\color{#A3BE8C}{\sum\_{\Gamma}\int\_{\Gamma}\langle \tau - pI\rangle : [u\otimes n]\mathrm d\ell}} \\\\
 & \qquad\qquad + {\color{#D08770}{\sum\_{\Gamma}\int\_{\Gamma}\frac{\alpha\mu}{2|\Gamma|}|[u]|^2\mathrm d\ell}}
 \end{align\*}$$
 
@@ -248,8 +246,8 @@ L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{1}{2}\tau : \dot\varepsil
 ### The variational form in TFC
 
 $$\begin{align\*}
-L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{h}{2}\tau : \dot\varepsilon - p\nabla\cdot hu - hg\cdot Ju\right)\mathrm dx}} \\\\
-& \qquad + {\color{#A3BE8C}{\sum\_{\Gamma}\int\_{\Gamma}\langle h(\tau - pI)\rangle : [Ju\otimes nJ^{-1}]\mathrm d\ell}} \\\\
+L(u, p) & = {\color{#81A1C1}{\int\_{\Omega}\left(\frac{h}{2}\tau : \dot\varepsilon - p\nabla\cdot hu - \rho gh\cdot Ju\right)\mathrm dx}} \\\\
+& \qquad - {\color{#A3BE8C}{\sum\_{\Gamma}\int\_{\Gamma}\langle h(\tau - pI)\rangle : [Ju\otimes nJ^{-1}]\mathrm d\ell}} \\\\
 & \qquad\qquad + {\color{#D08770}{\sum\_{\Gamma}\int\_{\Gamma}\frac{\alpha\mu}{2|\Gamma|}|[Ju]|^2\\; \langle h\rangle\\,\mathrm d\ell}}
 \end{align\*}$$
 
