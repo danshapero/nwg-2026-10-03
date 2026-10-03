@@ -283,12 +283,28 @@ It has some redeeming qualities
 
 -v-
 
+### Cartesian
+
 $$L(u, p) = \int\_\Omega\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - \rho g\cdot u\right)\mathrm dx$$
 
 -v-
+
+### Terrain-following
 
 $$L(u, p) = \int\_\Omega\left(\frac{h}{2}\tau : \dot\varepsilon - p\nabla\cdot hu - \rho gh\cdot Ju\right)\mathrm d\xi$$
 
 where now
 
 $$\dot\varepsilon = \frac{1}{2}\left\\{\nabla(Ju)J^{-1} + J^{-\*}\nabla(Ju)^\*\right\\}$$
+
+-v-
+
+### Cartesian
+
+$$\frac{\partial}{\partial t}\rho + \nabla\cdot \rho(u - v) = 0$$
+
+-v-
+
+### Terrain-following
+
+$$\frac{\partial}{\partial t}h\rho + \nabla\cdot h\rho(u - v) = 0$$
