@@ -276,3 +276,19 @@ $$\begin{align\*}
 <img src="https://icepack.github.io/images/logo.svg" class="r-stretch"/>
 
 It has some redeeming qualities
+
+---
+
+### Let's get wrecked
+
+-v-
+
+$$L(u, p) = \int\_\Omega\left(\frac{1}{2}\tau : \dot\varepsilon - p\nabla\cdot u - \rho g\cdot u\right)\mathrm dx$$
+
+-v-
+
+$$L(u, p) = \int\_\Omega\left(\frac{h}{2}\tau : \dot\varepsilon - p\nabla\cdot hu - \rho gh\cdot Ju\right)\mathrm d\xi$$
+
+where now
+
+$$\dot\varepsilon = \frac{1}{2}\left\\{\nabla(Ju)J^{-1} + J^{-\*}\nabla(Ju)^\*\right\\}$$
