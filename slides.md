@@ -12,6 +12,10 @@ University of Washington
 
 -v-
 
+<img src="IMG20240722183320.jpg" width="80%">
+
+-v-
+
 ### The problem
 
 Simulating free-surface fluid flow is hard because **the geometry is changing in time**.
